@@ -1,0 +1,14 @@
+# Node modules
+meeting-backend/node_modules/
+meeting-frontend/node_modules/
+
+# Environment files
+meeting-backend/.env
+meeting-frontend/.env
+
+# Build outputs
+meeting-frontend/build/
+meeting-backend/dist/
+
+# Logs
+*.log
