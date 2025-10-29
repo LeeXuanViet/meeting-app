@@ -8,6 +8,7 @@ const meetingSchema = new mongoose.Schema({
   startTime: Date,
   endTime: Date,
   status: { type: String, enum: ["scheduled", "ongoing", "completed"], default: "scheduled" },
+  roomId: { type: String, unique: true, required: true },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 })

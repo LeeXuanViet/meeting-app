@@ -92,8 +92,20 @@ meeting-app/
 - `DELETE /api/users/:id` - Xóa người dùng
 
 ### Meetings (Admin only)
-- `POST /api/meetings` - Tạo cuộc họp
+- `POST /api/meetings` - Tạo cuộc họp (tự động tạo roomId)
 - `GET /api/meetings` - Danh sách cuộc họp
+- `GET /api/meetings/:id` - Chi tiết cuộc họp
+- `GET /api/meetings/room/:roomId` - Chi tiết cuộc họp theo room ID
+- `POST /api/meetings/:id/join` - Tham gia cuộc họp
+- `POST /api/meetings/room/:roomId/join` - Tham gia cuộc họp theo room ID
+- `PUT /api/meetings/:id` - Cập nhật cuộc họp
+- `DELETE /api/meetings/:id` - Xóa cuộc họp
+
+### Real-time Socket.IO Events
+- `join-meeting` - Tham gia phòng họp trực tuyến
+- `leave-meeting` - Rời phòng họp
+- `chat-message` - Gửi tin nhắn chat
+- `typing` - Thông báo đang gõ
 
 ## Tài khoản Test
 
