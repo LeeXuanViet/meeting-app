@@ -34,9 +34,19 @@ This backend has been enhanced to support real-time online meetings with Socket.
 
 - `chat-message`: Send a chat message
   ```js
+  // Public chat (gửi cho tất cả mọi người)
   {
     roomId: "abc123",
-    message: "Hello everyone!"
+    message: "Hello everyone!",
+    messageType: "public"  // default
+  }
+
+  // Private chat (1-1 với 1 người cụ thể)
+  {
+    roomId: "abc123",
+    message: "Hello, this is a private message",
+    messageType: "private",
+    targetUserId: "user123"  // ID của người nhận
   }
   ```
 
