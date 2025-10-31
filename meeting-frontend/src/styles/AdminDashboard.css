@@ -1,0 +1,239 @@
+.admin-dashboard {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.admin-header {
+  margin-bottom: 40px;
+}
+
+.admin-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.admin-header p {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: rgba(10, 14, 39, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--primary);
+  background: rgba(10, 14, 39, 0.8);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.1);
+}
+
+.stat-icon {
+  font-size: 32px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.stat-icon.total {
+  background: rgba(100, 150, 255, 0.1);
+}
+
+.stat-icon.pending {
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.stat-icon.approved {
+  background: rgba(76, 175, 80, 0.1);
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+/* Pending Users Section */
+.pending-users-section {
+  background: rgba(10, 14, 39, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.pending-users-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-light);
+  margin: 0 0 24px 0;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table thead {
+  background-color: rgba(255, 215, 0, 0.05);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.users-table th {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.users-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.users-table tbody tr:hover {
+  background-color: rgba(255, 215, 0, 0.03);
+}
+
+.email-cell {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-approve,
+.btn-delete {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.btn-approve {
+  background-color: rgba(76, 175, 80, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.btn-approve:hover:not(:disabled) {
+  background-color: rgba(76, 175, 80, 0.3);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.btn-delete {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.btn-delete:hover:not(:disabled) {
+  background-color: rgba(244, 67, 54, 0.3);
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.2);
+}
+
+.btn-approve:disabled,
+.btn-delete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading,
+.empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 24px 16px;
+  }
+
+  .admin-header h1 {
+    font-size: 24px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pending-users-section {
+    padding: 20px;
+  }
+
+  .users-table th,
+  .users-table td {
+    padding: 12px 8px;
+    font-size: 12px;
+  }
+
+  .action-cell {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .btn-approve,
+  .btn-delete {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+}
