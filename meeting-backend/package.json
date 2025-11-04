@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node --max-old-space-size=4096 src/server.js",
+    "dev": "nodemon --exec \"node --max-old-space-size=4096\" src/server.js",
     "seed": "node scripts/seedAdmin.js"
   },
   "keywords": [],
@@ -18,11 +18,15 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-session": "^1.17.3",
     "jsonwebtoken": "^9.0.2",
+    "mammoth": "^1.6.0",
     "mongoose": "^8.19.2",
+    "multer": "^2.0.2",
+    "openai": "^4.28.0",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
-    "express-session": "^1.17.3",
+    "pdf-parse": "^1.1.1",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {

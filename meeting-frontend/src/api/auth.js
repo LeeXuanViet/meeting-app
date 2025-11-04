@@ -21,3 +21,22 @@ export const meetingAPI = {
   joinMeetingById: (id) => client.post(`/meetings/${id}/join`),
   joinMeetingByRoomId: (roomId) => client.post(`/meetings/room/${roomId}/join`),
 }
+
+export const documentAPI = {
+  uploadDocument: (formData) => {
+    // Axios sẽ tự động set Content-Type cho multipart/form-data
+    return client.post("/documents/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+  },
+  getDocuments: (roomId) => client.get(`/documents/meeting/${roomId}`),
+  downloadDocument: (id) => {
+    const token = sessionStorage.getItem("token") || localStorage.getItem("token")
+    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api"
+    window.open(`${API_URL}/documents/download/${id}?token=${token}`, "_blank")
+  },
+  deleteDocument: (id) => client.delete(`/documents/${id}`),
+  ragChat: (data) => client.post("/documents/rag/chat", data),
+}

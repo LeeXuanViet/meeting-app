@@ -4,12 +4,17 @@ import { useState, useEffect, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { io } from "socket.io-client"
 import { useAuth } from "../hooks/useAuth"
-// import { meetingAPI } from "../api/auth"
+import { documentAPI } from "../api/auth"
 import client from "../api/client"
 import Navbar from "../components/Navbar"
 import VideoCall from "../components/VideoCall"
+import DocumentUpload from "../components/DocumentUpload"
+import RAGChatbox from "../components/RAGChatbox"
 import "../styles/MeetingRoom.css"
 import "../styles/VideoCall.css"
+import "../styles/DocumentUpload.css"
+import "../styles/RAGChatbox.css"
+import "../styles/Documents.css"
 
 export default function MeetingRoomPage() {
   const { roomId } = useParams()
@@ -25,7 +30,8 @@ export default function MeetingRoomPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [showVideoCall, setShowVideoCall] = useState(false)
-  const [activeTab, setActiveTab] = useState("live") // 'meetings' | 'chat' | 'live'
+  const [documents, setDocuments] = useState([])
+  const [activeTab, setActiveTab] = useState("live") // 'meetings' | 'chat' | 'live' | 'documents'
   const [meetingsList, setMeetingsList] = useState([])
   const socketRef = useRef(null)
   const initializedRef = useRef(false)
@@ -160,6 +166,26 @@ export default function MeetingRoomPage() {
       setError("Không thể tải thông tin cuộc họp")
       setLoading(false)
     }
+  }
+
+  // Fetch documents for meeting
+  const fetchDocuments = async () => {
+    try {
+      const response = await documentAPI.getDocuments(roomId)
+      setDocuments(response.data)
+    } catch (error) {
+      console.error("Error fetching documents:", error)
+    }
+  }
+
+  useEffect(() => {
+    if (roomId && activeTab === "documents") {
+      fetchDocuments()
+    }
+  }, [roomId, activeTab]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleDocumentUploadSuccess = () => {
+    fetchDocuments()
   }
 
   // Fetch meetings for Meetings tab
@@ -328,6 +354,16 @@ export default function MeetingRoomPage() {
           >
             🎥 Trực tuyến
           </button>
+          <button
+            className={`tab-btn ${activeTab === "documents" ? "active" : ""}`}
+            onClick={() => {
+              setActiveTab("documents")
+              setShowVideoCall(false)
+              fetchDocuments()
+            }}
+          >
+            📄 Tài liệu
+          </button>
         </div>
 
         <div className="meeting-content">
@@ -426,11 +462,89 @@ export default function MeetingRoomPage() {
               </>
             )}
             {activeTab === "chat" && (
-            <div className="chat-header">
-              <h3>
-                {chatMode === "public" ? "💬 Chat công khai" : `🔒 Chat riêng với ${selectedUser?.userName}`}
-              </h3>
-            </div>
+              <>
+                <div className="chat-header">
+                  <h3>
+                    {chatMode === "public" ? "💬 Chat công khai" : `🔒 Chat riêng với ${selectedUser?.userName}`}
+                  </h3>
+                </div>
+              </>
+            )}
+
+            {activeTab === "documents" && (
+              <>
+                <div className="chat-header">
+                  <h3>📄 Tài liệu & AI Trợ lý</h3>
+                </div>
+
+                <div className="documents-content">
+                  <DocumentUpload roomId={roomId} onUploadSuccess={handleDocumentUploadSuccess} />
+
+                  {/* Documents List */}
+                  {documents.length > 0 && (
+                    <div className="documents-list">
+                      <h4>Danh sách tài liệu đã upload ({documents.length})</h4>
+                      <div className="documents-grid">
+                        {documents.map((doc) => (
+                          <div key={doc._id} className="document-card">
+                            <div
+                              className="document-clickable"
+                              onClick={() => documentAPI.downloadDocument(doc._id)}
+                              style={{ cursor: "pointer", display: "flex", alignItems: "flex-start", gap: "12px", flex: 1 }}
+                            >
+                              <div className="document-icon">📄</div>
+                              <div className="document-info">
+                                <div className="document-name" title={doc.originalName}>
+                                  {doc.originalName || doc.fileName || "Untitled"}
+                                </div>
+                                <div className="document-meta">
+                                  <span>Upload bởi: {doc.uploadedBy?.fullName || doc.uploadedBy?.email || "Unknown"}</span>
+                                  <span>
+                                    Trạng thái:{" "}
+                                    {doc.status === "processed"
+                                      ? "✅ Đã xử lý"
+                                      : doc.status === "processing"
+                                        ? "⏳ Đang xử lý..."
+                                        : doc.status === "error"
+                                          ? `❌ Lỗi: ${doc.errorMessage || "Unknown error"}`
+                                          : "⏳ Chờ xử lý"}
+                                  </span>
+                                  <span>Kích thước: {(doc.fileSize / 1024).toFixed(2)} KB</span>
+                                  {doc.processedAt && <span>Xử lý lúc: {new Date(doc.processedAt).toLocaleString("vi-VN")}</span>}
+                                </div>
+                              </div>
+                            </div>
+                            {doc.uploadedBy?._id === user?.id && (
+                              <button
+                                onClick={async (e) => {
+                                  e.stopPropagation()
+                                  if (window.confirm("Bạn có chắc muốn xóa tài liệu này?")) {
+                                    try {
+                                      await documentAPI.deleteDocument(doc._id)
+                                      fetchDocuments()
+                                    } catch (error) {
+                                      alert("Lỗi khi xóa tài liệu")
+                                    }
+                                  }
+                                }}
+                                className="btn-delete-doc"
+                                title="Xóa tài liệu"
+                              >
+                                🗑️
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* RAG Chatbox */}
+                  <div className="rag-chatbox-container">
+                    <RAGChatbox roomId={roomId} />
+                  </div>
+                </div>
+              </>
             )}
 
             {activeTab === "chat" && (<div className="messages-container" ref={messagesEndRef}>

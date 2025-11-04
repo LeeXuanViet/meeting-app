@@ -15,7 +15,7 @@ router.post("/", verifyToken, isAdmin, async (req, res) => {
   try {
     const { title, description, startTime, endTime } = req.body
 
-    // Tạo mã phòng họp duy nhất (roomId)
+    // Tạo mã phòng (roomId)
     let roomId = generateRoomId()
     let existingMeeting = await Meeting.findOne({ roomId })
 

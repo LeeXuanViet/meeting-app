@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import meetingRoutes from "./routes/meeting.js";
 import userRoutes from "./routes/user.js";
+import documentRoutes from "./routes/document.js";
 import { initializeSocket } from "./socket/socketHandler.js";
 
 dotenv.config();
@@ -35,6 +36,7 @@ initializeSocket(io);
 app.use("/api/auth", authRoutes);
 app.use("/api/meetings", meetingRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/documents", documentRoutes);
 
 const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, () => console.log(`Server running on port ${PORT}`));
