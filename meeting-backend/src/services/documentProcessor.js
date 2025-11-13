@@ -18,7 +18,7 @@ const getOpenAI = () => {
       apiKey: apiKey,
       baseURL: "https://openrouter.ai/api/v1", // OpenRouter API endpoint
       defaultHeaders: {
-        "HTTP-Referer": process.env.OPENROUTER_HTTP_REFERER || "http://localhost:5000", // Optional: for tracking
+        "HTTP-Referer": process.env.OPENROUTER_HTTP_REFERER || "http://bkmeeting.soict.io:5000", // Optional: for tracking
         "X-Title": process.env.OPENROUTER_APP_NAME || "Meeting App", // Optional: for tracking
       },
     })

@@ -34,7 +34,7 @@ export const documentAPI = {
   getDocuments: (roomId) => client.get(`/documents/meeting/${roomId}`),
   downloadDocument: (id) => {
     const token = sessionStorage.getItem("token") || localStorage.getItem("token")
-    const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api"
+    const API_URL = process.env.REACT_APP_API_URL || "https://bkmeeting.soict.io/api"
     window.open(`${API_URL}/documents/download/${id}?token=${token}`, "_blank")
   },
   deleteDocument: (id) => client.delete(`/documents/${id}`),

@@ -12,3 +12,12 @@ meeting-backend/dist/
 
 # Logs
 *.log
+
+# SSL Certificates (sensitive data - do not commit)
+certs/
+*.pem
+*.key
+*.crt
+
+# Nginx config (may contain sensitive paths)
+# nginx/

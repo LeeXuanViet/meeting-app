@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Copy file package và cài dependencies (npm ci = cài chính xác version)
 COPY package*.json ./
-RUN npm ci --production
+RUN npm install
 
 # Copy toàn bộ code backend vào container
 COPY . .

@@ -23,7 +23,7 @@ const httpServer = createServer(app);
 // Initialize Socket.IO with CORS configuration
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "https://bkmeeting.soict.io",
     methods: ["GET", "POST"],
     credentials: true,
   },

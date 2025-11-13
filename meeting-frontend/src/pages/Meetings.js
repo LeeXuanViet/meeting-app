@@ -8,7 +8,7 @@ const Meetings = () => {
 
   useEffect(() => {
     const fetchMeetings = async () => {
-      const res = await axios.get("http://localhost:5000/api/meetings", {
+      const res = await axios.get("https://bkmeeting.soict.io/api/meetings", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMeetings(res.data);

@@ -83,7 +83,7 @@ export default function MeetingRoomPage() {
       setMeeting(response.data)
 
       // Kết nối Socket.IO
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000"
+      const API_URL = process.env.REACT_APP_API_URL || "https://bkmeeting.soict.io"
       const socket = io(API_URL.replace("/api", ""), {
         auth: {
           token: token,

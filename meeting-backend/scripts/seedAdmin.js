@@ -8,7 +8,7 @@ dotenv.config()
 const seedAdmin = async () => {
   try {
     // Connect to MongoDB
-    await mongoose.connect(process.env.MONGO_URI)
+    await mongoose.connect("mongodb://root:example123@bkmeeting.soict.io:27017/meetingDB?authSource=admin")
     console.log("✓ Kết nối MongoDB thành công")
 
     // Check if admin already exists

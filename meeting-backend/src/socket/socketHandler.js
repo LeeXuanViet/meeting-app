@@ -327,26 +327,34 @@ export const initializeSocket = (io) => {
     // WebRTC Offer (caller gửi offer cho callee)
     socket.on("webrtc-offer", (data) => {
       const { roomId, targetUserId, offer } = data
+      console.log(`[Socket] Received webrtc-offer from ${socket.user.id} (${socket.user.fullName}) to ${targetUserId}`)
       const targetSocketId = userSocketMap.get(targetUserId)
       if (targetSocketId) {
+        console.log(`[Socket] Relaying webrtc-offer to socket ${targetSocketId} (userId: ${targetUserId})`)
         io.to(targetSocketId).emit("webrtc-offer", {
           fromUserId: socket.user.id,
           fromUserName: socket.user.fullName,
           offer,
         })
+      } else {
+        console.error(`[Socket] Cannot relay webrtc-offer: targetUserId ${targetUserId} not found in userSocketMap. Current map:`, Array.from(userSocketMap.entries()).map(([uid, sid]) => ({ userId: uid, socketId: sid })))
       }
     })
 
     // WebRTC Answer (callee trả lời offer)
     socket.on("webrtc-answer", (data) => {
       const { roomId, targetUserId, answer } = data
+      console.log(`[Socket] Received webrtc-answer from ${socket.user.id} (${socket.user.fullName}) to ${targetUserId}`)
       const targetSocketId = userSocketMap.get(targetUserId)
       if (targetSocketId) {
+        console.log(`[Socket] Relaying webrtc-answer to socket ${targetSocketId} (userId: ${targetUserId})`)
         io.to(targetSocketId).emit("webrtc-answer", {
           fromUserId: socket.user.id,
           fromUserName: socket.user.fullName,
           answer,
         })
+      } else {
+        console.error(`[Socket] Cannot relay webrtc-answer: targetUserId ${targetUserId} not found in userSocketMap`)
       }
     })
 
@@ -359,6 +367,8 @@ export const initializeSocket = (io) => {
           fromUserId: socket.user.id,
           candidate,
         })
+      } else {
+        console.warn(`[Socket] Cannot relay webrtc-ice-candidate: targetUserId ${targetUserId} not found`)
       }
     })
 
