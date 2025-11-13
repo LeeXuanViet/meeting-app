@@ -478,12 +478,15 @@ export default function MeetingRoomPage() {
                 </div>
 
                 <div className="documents-content">
-                  <DocumentUpload roomId={roomId} onUploadSuccess={handleDocumentUploadSuccess} />
+                  {/* Only show upload for admin */}
+                  {user?.role === "admin" && (
+                    <DocumentUpload roomId={roomId} onUploadSuccess={handleDocumentUploadSuccess} />
+                  )}
 
                   {/* Documents List */}
-                  {documents.length > 0 && (
-                    <div className="documents-list">
-                      <h4>Danh sách tài liệu đã upload ({documents.length})</h4>
+                  <div className="documents-list">
+                    <h4>Danh sách tài liệu ({documents.length})</h4>
+                    {documents.length > 0 ? (
                       <div className="documents-grid">
                         {documents.map((doc) => (
                           <div key={doc._id} className="document-card">
@@ -514,7 +517,8 @@ export default function MeetingRoomPage() {
                                 </div>
                               </div>
                             </div>
-                            {doc.uploadedBy?._id === user?.id && (
+                            {/* Only admin can delete documents */}
+                            {user?.role === "admin" && (
                               <button
                                 onClick={async (e) => {
                                   e.stopPropagation()
@@ -536,8 +540,12 @@ export default function MeetingRoomPage() {
                           </div>
                         ))}
                       </div>
-                    </div>
-                  )}
+                    ) : (
+                      <div className="documents-empty">
+                        <p>Chưa có tài liệu nào. {user?.role === "admin" && "Admin có thể upload tài liệu ở trên."}</p>
+                      </div>
+                    )}
+                  </div>
 
                   {/* RAG Chatbox */}
                   <div className="rag-chatbox-container">

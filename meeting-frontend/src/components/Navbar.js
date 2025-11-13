@@ -18,7 +18,12 @@ export default function Navbar() {
     navigate("/admin")
   }
 
+  const handleDashboardClick = () => {
+    navigate("/dashboard")
+  }
+
   const isAdminPage = location.pathname === "/admin"
+  const isDashboardPage = location.pathname === "/dashboard"
 
   return (
     <nav className="navbar">
@@ -28,16 +33,32 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-menu">
+          {/* Navigation buttons for admin */}
+          {user?.role === "admin" && (
+            <div className="navbar-nav">
+              <button
+                onClick={handleDashboardClick}
+                className={`nav-btn ${isDashboardPage ? "active" : ""}`}
+                title="Dashboard"
+              >
+                <span className="nav-icon">📊</span>
+                <span className="nav-text">Dashboard</span>
+              </button>
+              <button
+                onClick={handleAdminClick}
+                className={`nav-btn ${isAdminPage ? "active" : ""}`}
+                title="Admin Panel"
+              >
+                <span className="nav-icon">⚙️</span>
+                <span className="nav-text">Admin</span>
+              </button>
+            </div>
+          )}
+
           <span className="user-info">
             {user?.fullName || user?.email}
             {user?.role === "admin" && <span className="admin-badge">Admin</span>}
           </span>
-
-          {user?.role === "admin" && !isAdminPage && (
-            <button onClick={handleAdminClick} className="btn-admin">
-              Admin
-            </button>
-          )}
 
           <button onClick={handleLogout} className="btn-logout">
             Đăng xuất

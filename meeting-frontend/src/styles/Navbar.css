@@ -27,7 +27,61 @@
 .navbar-menu {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+  padding-right: 16px;
+  border-right: 1px solid var(--border-color);
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-light);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background-color: rgba(255, 215, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.nav-btn.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--bg-dark);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+}
+
+.nav-btn.active:hover {
+  background-color: #ffc700;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.nav-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.nav-text {
+  font-size: 14px;
 }
 
 .user-info {
@@ -67,6 +121,7 @@
   background-color: rgba(244, 67, 54, 0.05);
 }
 
+/* Legacy btn-admin - kept for backward compatibility but not used anymore */
 .btn-admin {
   background-color: var(--primary);
   border: none;
@@ -95,7 +150,26 @@
   }
 
   .navbar-menu {
-    gap: 12px;
+    gap: 8px;
+  }
+
+  .navbar-nav {
+    gap: 4px;
+    margin-right: 4px;
+    padding-right: 8px;
+  }
+
+  .nav-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .nav-text {
+    display: none;
+  }
+
+  .nav-icon {
+    font-size: 18px;
   }
 
   .user-info {
