@@ -426,7 +426,7 @@ export default function MeetingRoomPage() {
           </div>
 
           {/* Main Area (switch by tab) */}
-          <div className="meeting-chat">
+          <div className={`meeting-chat ${activeTab === "live" ? "live-mode" : ""}`}>
             {activeTab === "live" && (
               <>
                 {!showVideoCall && (

@@ -25,12 +25,25 @@ export default function Navbar() {
   const isAdminPage = location.pathname === "/admin"
   const isDashboardPage = location.pathname === "/dashboard"
 
+  const getInitials = () => {
+    const source = user?.fullName || user?.email || ""
+    if (!source) return "ME"
+    const parts = source.trim().split(" ").filter(Boolean)
+    if (parts.length === 0) return source.slice(0, 2).toUpperCase()
+    const initials = parts.map((part) => part[0]).join("")
+    return initials.slice(0, 2).toUpperCase()
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-brand">
-          <h2>Meeting App</h2>
-        </div>
+        <button className="navbar-brand" onClick={handleDashboardClick} aria-label="Quay lại dashboard">
+          <div className="brand-icon">✦</div>
+          <div className="brand-copy">
+            <span className="brand-title">xMeet</span>
+            <span className="brand-tagline">Smart meeting workspace</span>
+          </div>
+        </button>
 
         <div className="navbar-menu">
           {/* Navigation buttons for admin */}
@@ -55,10 +68,13 @@ export default function Navbar() {
             </div>
           )}
 
-          <span className="user-info">
-            {user?.fullName || user?.email}
-            {user?.role === "admin" && <span className="admin-badge">Admin</span>}
-          </span>
+          <div className="navbar-user">
+            <div className="user-info">
+              <span className="user-name">{user?.fullName || user?.email}</span>
+              <span className="user-role">{user?.role === "admin" ? "Quản trị viên" : "Thành viên"}</span>
+            </div>
+            <div className="user-avatar">{getInitials()}</div>
+          </div>
 
           <button onClick={handleLogout} className="btn-logout">
             Đăng xuất

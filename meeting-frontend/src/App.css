@@ -1,4 +1,4 @@
 .app {
   min-height: 100vh;
-  background-color: var(--bg-dark);
+  background: radial-gradient(circle at top left, #e8f0fe, #f4f6fb 55%, #fdfdfd);
 }

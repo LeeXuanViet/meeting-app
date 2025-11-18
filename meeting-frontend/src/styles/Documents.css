@@ -10,7 +10,7 @@
 .documents-list h4 {
   font-size: 16px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text-light);
   margin: 0 0 16px 0;
 }
 
@@ -19,9 +19,9 @@
   padding: 40px 20px;
   color: var(--text-muted);
   font-size: 14px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px dashed var(--border-color);
-  border-radius: 8px;
+  background: var(--surface-muted);
+  border: 1px dashed rgba(223, 227, 235, 0.9);
+  border-radius: 18px;
 }
 
 .documents-grid {
@@ -32,22 +32,22 @@
 }
 
 .document-card {
-  background: rgba(10, 14, 39, 0.6);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 16px;
+  background: var(--surface);
+  border: 1px solid rgba(223, 227, 235, 0.9);
+  border-radius: 20px;
+  padding: 18px;
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   position: relative;
+  box-shadow: var(--shadow-soft);
 }
 
 .document-card:hover {
-  border-color: var(--primary);
-  background: rgba(10, 14, 39, 0.8);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
-  transform: translateY(-2px);
+  border-color: rgba(11, 87, 208, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.18);
 }
 
 .document-clickable {
@@ -57,25 +57,6 @@
   gap: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.document-clickable:hover {
-  opacity: 0.9;
-}
-
-.document-clickable::after {
-  content: "⬇️ Tải xuống";
-  position: absolute;
-  bottom: 16px;
-  right: 60px;
-  font-size: 12px;
-  color: var(--primary);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.document-card:hover .document-clickable::after {
-  opacity: 1;
 }
 
 .document-icon {
@@ -115,7 +96,7 @@
   border: 1px solid var(--border-color);
   color: var(--danger);
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
@@ -123,9 +104,9 @@
 }
 
 .btn-delete-doc:hover {
-  background: rgba(244, 67, 54, 0.1);
+  background: rgba(217, 48, 37, 0.08);
   border-color: var(--danger);
-  transform: scale(1.1);
+  transform: scale(1.04);
 }
 
 .rag-chatbox-container {

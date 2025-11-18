@@ -1,22 +1,23 @@
 .document-upload {
-  background: rgba(10, 14, 39, 0.6);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--surface);
+  border: 1px solid rgba(223, 227, 235, 0.9);
+  border-radius: 24px;
+  padding: 24px;
   margin-bottom: 20px;
+  box-shadow: var(--shadow-soft);
 }
 
 .upload-header h3 {
   font-size: 18px;
   font-weight: 700;
   color: var(--text-light);
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
 }
 
 .upload-hint {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
-  margin: 0 0 16px 0;
+  margin: 0 0 18px 0;
 }
 
 .upload-area {
@@ -40,16 +41,16 @@
   justify-content: center;
   gap: 12px;
   padding: 40px 20px;
-  border: 2px dashed var(--border-color);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
+  border: 2px dashed rgba(11, 87, 208, 0.2);
+  border-radius: 18px;
+  background: var(--surface-muted);
   color: var(--text-muted);
   transition: all 0.3s ease;
 }
 
 .file-placeholder:hover {
   border-color: var(--primary);
-  background: rgba(255, 215, 0, 0.05);
+  background: var(--primary-soft);
   color: var(--text-light);
 }
 
@@ -62,9 +63,9 @@
   align-items: center;
   gap: 12px;
   padding: 16px;
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  background: rgba(255, 215, 0, 0.05);
+  border: 1px solid var(--primary-soft);
+  border-radius: 18px;
+  background: rgba(11, 87, 208, 0.08);
 }
 
 .file-icon {
@@ -91,21 +92,20 @@
 
 .btn-upload {
   width: 100%;
-  background-color: var(--primary);
-  color: var(--bg-dark);
-  padding: 12px 24px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #0b57d0, #1a73e8);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 16px;
   border: none;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 12px 24px rgba(11, 87, 208, 0.25);
 }
 
 .btn-upload:hover:not(:disabled) {
-  background-color: var(--primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
 .btn-upload:disabled {
@@ -113,22 +113,22 @@
   cursor: not-allowed;
 }
 
-.upload-error {
-  margin-top: 12px;
-  padding: 12px;
-  background: rgba(244, 67, 54, 0.1);
-  border: 1px solid var(--danger);
-  border-radius: 8px;
-  color: var(--danger);
-  font-size: 14px;
-}
-
+.upload-error,
 .upload-success {
   margin-top: 12px;
   padding: 12px;
-  background: rgba(76, 175, 80, 0.1);
-  border: 1px solid var(--success);
-  border-radius: 8px;
-  color: var(--success);
+  border-radius: 12px;
   font-size: 14px;
+}
+
+.upload-error {
+  background: rgba(217, 48, 37, 0.08);
+  border: 1px solid rgba(217, 48, 37, 0.2);
+  color: var(--danger);
+}
+
+.upload-success {
+  background: rgba(52, 168, 83, 0.08);
+  border: 1px solid rgba(52, 168, 83, 0.2);
+  color: var(--success);
 }
